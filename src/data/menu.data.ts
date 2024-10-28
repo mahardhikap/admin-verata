@@ -172,3 +172,22 @@ export const CatalogDummy = [
       category: 'Furniture'
     },
   ];
+
+  export const listSortBy = [
+    {
+      label: "Nama Produk",
+      key: "product",
+    },
+    {
+      label: "Kategori",
+      key: "category",
+    },
+    {
+      label: "Harga",
+      key: "price",
+    },
+    {
+      label: "Diskon",
+      key: "disc",
+    },
+  ];

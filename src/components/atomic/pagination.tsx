@@ -1,12 +1,25 @@
 import React from "react";
+import { PaginationI } from "@/interfaces/catalog.interface";
 
-const Pagination: React.FC = () => {
+interface PaginationProps extends PaginationI {
+  onPageChange: (newPage: number) => void;
+}
+
+const Pagination: React.FC<PaginationProps> = ({
+  totalPage,
+  pageNow,
+  onPageChange,
+}) => {
   return (
     <>
       <div className="flex items-center gap-8 text-gray-600">
         <button
-          className="rounded-md border border-slate-300 p-2.5 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-black hover:bg-slate-800 hover:border-slate-800 focus:text-black focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-black active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          className={`rounded-md border border-slate-300 p-2.5 ${
+            pageNow === 1 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
           type="button"
+          onClick={() => pageNow > 1 && onPageChange(pageNow - 1)}
+          disabled={pageNow === 1}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -23,13 +36,17 @@ const Pagination: React.FC = () => {
         </button>
 
         <p className="text-slate-600">
-          Page <strong className="text-slate-800">1</strong> of&nbsp;
-          <strong className="text-slate-800">10</strong>
+          Page <strong className="text-slate-800">{pageNow}</strong> of&nbsp;
+          <strong className="text-slate-800">{totalPage}</strong>
         </p>
 
         <button
-          className="rounded-md border border-slate-300 p-2.5 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-black hover:bg-slate-800 hover:border-slate-800 focus:text-black focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-black active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          className={`rounded-md border border-slate-300 p-2.5 ${
+            pageNow === totalPage ? "opacity-50 cursor-not-allowed" : ""
+          }`}
           type="button"
+          onClick={() => pageNow < totalPage && onPageChange(pageNow + 1)}
+          disabled={pageNow === totalPage}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
