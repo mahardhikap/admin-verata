@@ -16,13 +16,13 @@ const Dashboard: React.FC<DashboardI> = ({ children }) => {
   return (
     <PageContainer>
       <div className="grid grid-cols-12">
-        <div className="col-span-3 flex flex-col text-base font-medium gap-3 bg-main h-screen sticky text-white p-3">
+        <div className="col-span-2 flex flex-col text-base font-medium gap-3 bg-main h-screen sticky text-white p-3">
           <Image
             src="/verata.jpg"
             alt="verata-logo"
             width={500}
             height={500}
-            className="w-1/4 grayscale hover:grayscale-0 cursor-pointer"
+            className="w-2/5 grayscale hover:grayscale-0 cursor-pointer"
             onClick={() => router.replace("/dashboard")}
           />
           {MenuDashboard?.map((item, i) => {
@@ -45,7 +45,7 @@ const Dashboard: React.FC<DashboardI> = ({ children }) => {
             Logout
           </div>
         </div>
-        <div className="col-span-9 overflow-y-auto h-screen">{children}</div>
+        <div className="col-span-10 overflow-y-auto h-screen">{children}</div>
       </div>
     </PageContainer>
   );

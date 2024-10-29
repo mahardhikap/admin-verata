@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <PageContainer>
-      <div className="flex flex-col justify-center items-center h-screen w-screen bg-main text-white">
+      <div className="flex flex-col justify-center items-center h-screen w-screen bg-main text-white relative">
         <Image
           src="/verata.jpg"
           alt="logo-verata"
@@ -55,6 +55,7 @@ export default function Home() {
             name="username"
             value={data.username} 
             onChange={handleInputChange} 
+            autoComplete="off"
           />
           <Input 
             color="white" 
@@ -66,6 +67,7 @@ export default function Home() {
           />
           <Button color="white" className="w-full" onClick={handleLogin}>Login</Button>
         </div>
+        <div className="font-semibold text-white text-xs absolute bottom-0 pb-10">&copy; 2024 Verata. All rights reserved.</div>
       </div>
     </PageContainer>
   );

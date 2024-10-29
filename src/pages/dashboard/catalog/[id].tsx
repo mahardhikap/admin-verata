@@ -11,6 +11,8 @@ import { detailProduct } from "@/api/catalog.api";
 import { deleteFiles } from "@/api/upload-file.api";
 import { IoClose } from "react-icons/io5";
 import { extractFilename } from "@/utils/extract-file-name";
+import withAuth from "@/utils/with-auth";
+import Loading from "@/components/atomic/loading";
 
 const CatalogDetail: React.FC = () => {
   const router = useRouter();
@@ -27,7 +29,7 @@ const CatalogDetail: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [listCategory, setListCategory] = useState<CategoryListI[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [imagesToDelete, setImagesToDelete] = useState<string[]>([]); // Track images to be deleted
+  const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchCategoryList = async () => {
@@ -138,141 +140,141 @@ const CatalogDetail: React.FC = () => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   const totalImages = [...data.image, ...files];
 
   return (
     <Dashboard>
-      <div className="flex flex-col gap-5 p-3">
-        <div className="flex flex-col gap-2">
-          <div>Product Name</div>
-          <input
-            type="text"
-            name="product"
-            className="px-3 py-2 border-2 border-black"
-            value={data?.product}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <div className="flex flex-wrap xl:flex-row gap-3">
-            <div className="flex flex-col gap-2">
-              <div>Price</div>
-              <input
-                type="number"
-                name="price"
-                className="px-3 py-2 border-2 border-black"
-                value={data?.price}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div>Discount</div>
-              <input
-                type="number"
-                name="disc"
-                className="px-3 py-2 border-2 border-black"
-                value={data?.disc}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div>Stock</div>
-              <select
-                name="stock"
-                className="border-2 border-black px-3 py-2"
-                value={data?.stock ? "Ada" : "Tidak Ada"}
-                onChange={handleInputChange}
-              >
-                <option value="" disabled>
-                  Select Stock
-                </option>
-                <option value="Ada">Ada</option>
-                <option value="Tidak Ada">Tidak Ada</option>
-              </select>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div>Category</div>
-              <select
-                name="category"
-                className="border-2 border-black px-3 py-2"
-                value={data?.category_id}
-                onChange={handleInputChange}
-              >
-                <option value="" disabled>
-                  Select Category
-                </option>
-                {listCategory?.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="flex flex-col gap-5 p-3">
+          <div className="flex flex-col gap-2">
+            <div>Product Name</div>
+            <input
+              type="text"
+              name="product"
+              className="px-3 py-2 border-2 border-black"
+              value={data?.product}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <div className="flex flex-wrap xl:flex-row gap-3">
+              <div className="flex flex-col gap-2">
+                <div>Price</div>
+                <input
+                  type="number"
+                  name="price"
+                  className="px-3 py-2 border-2 border-black"
+                  value={data?.price}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <div>Discount</div>
+                <input
+                  type="number"
+                  name="disc"
+                  className="px-3 py-2 border-2 border-black"
+                  value={data?.disc}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <div>Stock</div>
+                <select
+                  name="stock"
+                  className="border-2 border-black px-3 py-2"
+                  value={data?.stock ? "Ada" : "Tidak Ada"}
+                  onChange={handleInputChange}
+                >
+                  <option value="" disabled>
+                    Select Stock
                   </option>
-                ))}
-              </select>
+                  <option value="Ada">Ada</option>
+                  <option value="Tidak Ada">Tidak Ada</option>
+                </select>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div>Category</div>
+                <select
+                  name="category"
+                  className="border-2 border-black px-3 py-2"
+                  value={data?.category_id}
+                  onChange={handleInputChange}
+                >
+                  <option value="" disabled>
+                    Select Category
+                  </option>
+                  {listCategory?.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <div>Description</div>
-          <textarea
-            name="description"
-            className="px-3 py-2 border-2 border-black h-72"
-            value={data?.description}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex flex-row items-center gap-4">
-          {totalImages.map((imgSrc, index) => (
-            <div
-              key={index}
-              className="relative aspect-square h-40 w-40 bg-gray-300 flex items-center justify-center"
-            >
-              <img
-                src={
-                  typeof imgSrc === "string"
-                    ? imgSrc
-                    : URL.createObjectURL(imgSrc)
-                }
-                alt={`Product Image ${index + 1}`}
-                className="object-cover h-full w-full"
-              />
-              <button
-                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
-                onClick={() => handleRemoveImage(index)}
+          <div className="flex flex-col gap-2">
+            <div>Description</div>
+            <textarea
+              name="description"
+              className="px-3 py-2 border-2 border-black h-72"
+              value={data?.description}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="flex flex-row items-center gap-4">
+            {totalImages.map((imgSrc, index) => (
+              <div
+                key={index}
+                className="relative aspect-square h-40 w-40 bg-gray-300 flex items-center justify-center"
               >
-                <IoClose />
-              </button>
-            </div>
-          ))}
-          {totalImages.length < 3 && (
-            <>
-              <input
-                type="file"
-                multiple
-                onChange={handleUploadImage}
-                className="hidden"
-                id="fileUpload"
-              />
-              <label
-                htmlFor="fileUpload"
-                className="aspect-square h-40 w-40 bg-gray-300 flex items-center justify-center text-4xl font-semibold cursor-pointer"
-              >
-                +
-              </label>
-            </>
-          )}
+                <img
+                  src={
+                    typeof imgSrc === "string"
+                      ? imgSrc
+                      : URL.createObjectURL(imgSrc)
+                  }
+                  alt={`Product Image ${index + 1}`}
+                  className="object-cover h-full w-full"
+                />
+                <button
+                  className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
+                  onClick={() => handleRemoveImage(index)}
+                >
+                  <IoClose />
+                </button>
+              </div>
+            ))}
+            {totalImages.length < 3 && (
+              <>
+                <input
+                  type="file"
+                  multiple
+                  onChange={handleUploadImage}
+                  className="hidden"
+                  id="fileUpload"
+                />
+                <label
+                  htmlFor="fileUpload"
+                  className="aspect-square h-40 w-40 bg-gray-300 flex items-center justify-center text-4xl font-semibold cursor-pointer"
+                >
+                  +
+                </label>
+              </>
+            )}
+          </div>
+          <button
+            className="py-2 bg-[#919295] text-lg text-white font-semibold"
+            onClick={handlePostProduct}
+          >
+            Update Product
+          </button>
         </div>
-        <button
-          className="py-2 bg-[#919295] text-lg text-white font-semibold"
-          onClick={handlePostProduct}
-        >
-          Update Product
-        </button>
-      </div>
+      )}
     </Dashboard>
   );
 };
 
-export default CatalogDetail;
+export default withAuth(CatalogDetail);
