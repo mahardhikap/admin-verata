@@ -62,7 +62,7 @@ const CatalogCreate: React.FC = () => {
   const handlePostProduct = async () => {
     let imagePaths: string[] = [];
     try {
-      setLoading(true)
+      setLoading(true);
       if (files.length > 0) {
         const uploadResult = await uploadFiles(files);
         if (uploadResult) {
@@ -131,21 +131,35 @@ const CatalogCreate: React.FC = () => {
               <div className="flex flex-col gap-2">
                 <div>Price</div>
                 <input
+                  min="0"
                   type="number"
+                  pattern="[0-9]"
                   name="price"
+                  value={data.price ? data.price : ""}
                   className="px-3 py-2 border-2 border-black"
-                  value={data.price}
                   onChange={handleInputChange}
+                  onKeyPress={(e) => {
+                    if (e.key === "." || e.key === "," || e.key === "-") {
+                      e.preventDefault();
+                    }
+                  }}
                 />
               </div>
               <div className="flex flex-col gap-2">
                 <div>Discount</div>
                 <input
+                  min="0"
                   type="number"
+                  pattern="[0-9]"
                   name="disc"
                   className="px-3 py-2 border-2 border-black"
-                  value={data.disc}
+                  value={data.disc ? data.disc : ''}
                   onChange={handleInputChange}
+                  onKeyPress={(e) => {
+                    if (e.key === "." || e.key === "," || e.key === "-") {
+                      e.preventDefault();
+                    }
+                  }}
                 />
               </div>
               <div className="flex flex-col gap-2">

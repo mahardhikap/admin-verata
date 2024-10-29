@@ -162,10 +162,10 @@ const Catalog: React.FC = () => {
                   key={item.id}
                 >
                   <td className="py-3 px-6">{truncateText(item.id, 3)}</td>
-                  <td className="py-3 px-6">{item.product}</td>
+                  <td className="py-3 px-6">{truncateText(item.product, 15)}</td>
                   <td className="py-3 px-6">{item.disc}</td>
                   <td className="py-3 px-6">
-                    {truncateText(item.description, 20)}
+                    {truncateText(item.description, 30)}
                   </td>
                   <td className="py-3 px-6">{item.price}</td>
                   <td className="py-3 px-6">{item.stock ? "Ada" : "Kosong"}</td>
