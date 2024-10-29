@@ -158,7 +158,7 @@ const CatalogDetail: React.FC = () => {
           />
         </div>
         <div>
-          <div className="flex flex-row gap-3">
+          <div className="flex flex-wrap xl:flex-row gap-3">
             <div className="flex flex-col gap-2">
               <div>Price</div>
               <input
@@ -268,7 +268,7 @@ const CatalogDetail: React.FC = () => {
           className="py-2 bg-[#919295] text-lg text-white font-semibold"
           onClick={handlePostProduct}
         >
-          Submit
+          Update Product
         </button>
       </div>
     </Dashboard>

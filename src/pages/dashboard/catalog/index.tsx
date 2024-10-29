@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { listSortBy } from "@/data/menu.data";
 import { deleteFiles } from "@/api/upload-file.api";
 import { extractFilename } from "@/utils/extract-file-name";
+import { truncateText } from "@/utils/truncate-text";
 
 const Catalog: React.FC = () => {
   const router = useRouter();
@@ -86,7 +87,7 @@ const Catalog: React.FC = () => {
 
   return (
     <Dashboard>
-      <div className="overflow-y-auto h-screen">
+      <div>
         <div className="flex justify-between m-5">
           <div className="flex items-center gap-5">
             <input
@@ -109,7 +110,7 @@ const Catalog: React.FC = () => {
                 }
               >
                 <option value="" disabled selected>
-                  Select Category
+                  Sort By
                 </option>
                 {listSortBy.map((category, i) => (
                   <option key={i} value={category.key}>
@@ -149,10 +150,10 @@ const Catalog: React.FC = () => {
                 className="border-b border-gray-300 hover:bg-gray-100"
                 key={item.id}
               >
-                <td className="py-3 px-6">{item.id}</td>
+                <td className="py-3 px-6">{truncateText(item.id, 10)}</td>
                 <td className="py-3 px-6">{item.product}</td>
                 <td className="py-3 px-6">{item.disc}</td>
-                <td className="py-3 px-6">{item.description}</td>
+                <td className="py-3 px-6">{truncateText(item.description, 10)}</td>
                 <td className="py-3 px-6">{item.price}</td>
                 <td className="py-3 px-6">{item.stock ? "Ada" : "Kosong"}</td>
                 <td className="py-3 px-6">{item.category}</td>

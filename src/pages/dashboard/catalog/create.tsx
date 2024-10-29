@@ -9,6 +9,7 @@ import { CategoryListI } from "@/interfaces/category.interface";
 import { useRouter } from "next/router";
 import { deleteFiles } from "@/api/upload-file.api";
 import { extractFilename } from "@/utils/extract-file-name";
+import { IoClose } from "react-icons/io5";
 
 const CatalogCreate: React.FC = () => {
   const router = useRouter();
@@ -113,7 +114,7 @@ const CatalogCreate: React.FC = () => {
           />
         </div>
         <div>
-          <div className="flex flex-row gap-3">
+          <div className="flex flex-wrap xl:flex-row gap-3">
             <div className="flex flex-col gap-2">
               <div>Price</div>
               <input
@@ -191,7 +192,7 @@ const CatalogCreate: React.FC = () => {
                 className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
                 onClick={() => handleRemoveImage(index)}
               >
-                X
+                <IoClose />
               </button>
             </div>
           ))}
@@ -217,7 +218,7 @@ const CatalogCreate: React.FC = () => {
           className="py-2 bg-[#919295] text-lg text-white font-semibold"
           onClick={handlePostProduct}
         >
-          Submit
+          Create Product
         </button>
       </div>
     </Dashboard>
