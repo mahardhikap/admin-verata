@@ -13,6 +13,10 @@ import { IoClose } from "react-icons/io5";
 import { extractFilename } from "@/utils/extract-file-name";
 import withAuth from "@/utils/with-auth";
 import Loading from "@/components/atomic/loading";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
+import { quilFormats, quilModules } from "@/data/menu.data";
 
 const CatalogDetail: React.FC = () => {
   const router = useRouter();
@@ -217,11 +221,12 @@ const CatalogDetail: React.FC = () => {
           </div>
           <div className="flex flex-col gap-2">
             <div>Description</div>
-            <textarea
-              name="description"
-              className="px-3 py-2 border-2 border-black h-72"
-              value={data?.description}
-              onChange={handleInputChange}
+            <ReactQuill
+              value={data.description}
+              onChange={(value) => setData({ ...data, description: value })}
+              className="border-2 border-black h-60 overflow-y-auto"
+              modules={quilModules}
+              formats={quilFormats}
             />
           </div>
           <div className="flex flex-row items-center gap-4">
