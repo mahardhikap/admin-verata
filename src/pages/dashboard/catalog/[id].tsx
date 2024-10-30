@@ -120,7 +120,7 @@ const CatalogDetail: React.FC = () => {
 
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || []);
-    if (selectedFiles.length + files.length > 3) {
+    if (selectedFiles.length + files.length > 5) {
       toast.error("Maximum 3 images can be uploaded.");
       return;
     }
@@ -266,7 +266,7 @@ const CatalogDetail: React.FC = () => {
                 </button>
               </div>
             ))}
-            {totalImages.length < 3 && (
+            {totalImages.length < 5 && (
               <>
                 <input
                   type="file"
