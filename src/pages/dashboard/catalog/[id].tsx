@@ -172,7 +172,7 @@ const CatalogDetail: React.FC = () => {
                   pattern="[0-9]"
                   name="price"
                   className="px-3 py-2 border-2 border-black"
-                  value={data?.price ? data?.price : ''}
+                  value={data?.price ? data?.price : ""}
                   onChange={handleInputChange}
                   onKeyPress={(e) => {
                     if (e.key === "." || e.key === "," || e.key === "-") {
@@ -189,7 +189,7 @@ const CatalogDetail: React.FC = () => {
                   pattern="[0-9]"
                   name="disc"
                   className="px-3 py-2 border-2 border-black"
-                  value={data?.disc ? data?.disc : ''}
+                  value={data?.disc ? data?.disc : ""}
                   onChange={handleInputChange}
                   onKeyPress={(e) => {
                     if (e.key === "." || e.key === "," || e.key === "-") {
@@ -274,6 +274,7 @@ const CatalogDetail: React.FC = () => {
                   onChange={handleUploadImage}
                   className="hidden"
                   id="fileUpload"
+                  accept="image/jpeg, image/png"
                 />
                 <label
                   htmlFor="fileUpload"

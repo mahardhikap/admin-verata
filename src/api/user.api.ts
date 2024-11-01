@@ -29,3 +29,42 @@ export const detailUser = async () => {
     console.error(error.message);
   }
 };
+
+export const updateUser = async (id: string, data: { password: string }) => {
+  try {
+    const token = localStorage.getItem("token");
+    if (token) {
+      apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+    const response = await apiClient.put(`/user/${id}/update`, data);
+    return response.data;
+  } catch (error: any) {
+    console.error(error.message);
+  }
+};
+
+export const createUser = async (data: { username: string, password:string }) => {
+  try {
+    const token = localStorage.getItem("token");
+    if (token) {
+      apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+    const response = await apiClient.post(`/user/create`, data);
+    return response.data;
+  } catch (error: any) {
+    console.error(error.message);
+  }
+};
+
+export const userList = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (token) {
+      apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+    const response = await apiClient.get("/user/list");
+    return response.data;
+  } catch (error: any) {
+    console.error(error.message);
+  }
+};

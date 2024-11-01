@@ -232,6 +232,7 @@ const CatalogCreate: React.FC = () => {
                   onChange={handleUploadImage}
                   className="hidden"
                   id="fileUpload"
+                  accept="image/jpeg, image/png"
                 />
                 <label
                   htmlFor="fileUpload"

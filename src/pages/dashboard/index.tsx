@@ -25,7 +25,7 @@ const StartDashboard: React.FC = () => {
     <Dashboard>
       <div className="flex flex-col items-center justify-center h-full">
         <div className="font-semibold">
-          Hello {user?.username || "Guest"}, welcome to the Verata dashboard!
+          Hello {user?.username || "Guest"}, welcome to Verata dashboard!
         </div>
         <div>Menu ada di sebelah kiri</div>
       </div>
